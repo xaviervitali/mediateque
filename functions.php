@@ -8,7 +8,7 @@ function sendSQL($requeteSQL, $tabAssoColonneValeur)
 {
     $database = 'MyVideos119';
     $user = 'root';
-    $pass = 'Soleil13';
+    $pass = '****';
     $host = 'localhost';
     $portSQL      = 3306;
     $charsetSQL   = "utf8";
