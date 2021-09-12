@@ -1,0 +1,16 @@
+
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+$date = date("_d-m-Y_H-i-s");
+$database = 'MyVideos116';
+$user = 'root';
+$pass = 'Soleil13';
+$host = 'localhost';
+$dir = "/volume2/Cloud_Syno/kodiDb/MesVideos$date.sql";
+echo "Backing up database to '$dir'";
+exec("mysqldump --user={$user} --password={$pass} --host={$host} {$database} --result-file={$dir} ", $output);
+var_dump("\n $output \n ");
+?>
+

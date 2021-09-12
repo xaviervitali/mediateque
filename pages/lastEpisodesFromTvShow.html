@@ -1,0 +1,77 @@
+<html>
+
+<body>
+
+
+    <h1 class="text-center">Liste des Series</h1>
+    <form method='get'>
+        <div class="form-group ">
+            <div class="form-inline ">
+
+
+
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="filterWatched">
+                    <label class="custom-control-label" for="filterWatched">Masquer les series vues</label>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+    
+        <button type='submit' class="btn btn-info" name='backupSql' id="backupSql">Sauver la dB</button>
+        <a href="delete.php" class="btn btn-danger">Supprimer les doublons</a>
+        <p id="backupStatus"></p>
+    <hr>
+    <table class="table table-striped text-center " id="table"  data-search="true"  data-search="true" data-sortable="true" data-toggle="table" data-show-toggle="true" data-locale="fr-FR"  data-detail-formatter="detailFormatter" data-url="pages/json.php">
+        <thead>
+            <tr>
+                <th data-field="poster" data-formatter="imageFormatter" >Image</th>
+                <th data-field="title" >Titre</th>
+                
+                <th data-field="saison" data-sortable="true"  >Saison</th>
+                <th data-field="ep" data-sortable="true"  >Episode</th>
+                <th data-field="downloadedAt" data-sortable="true" data-formatter="dateFormatter"  >Ajouté le</th>
+                <th data-field="lastPlayed" data-sortable="true" data-formatter="watchedFormatter"  >Vu ?</th>
+               <!-- <th data-field="ep_guide" data-formatter="lastAiredFormatter">Dernier Episode diffusé</th>  -->
+            </tr>
+        </thead>
+
+
+
+    </table> 
+</body>
+<script>
+
+     
+$("#backupSql").click((event) => {
+  event.preventDefault();
+  $("#filterWatched").click(() => {
+    if ($("#filterWatched")[0].checked) {
+      $("#table").bootstrapTable("filterBy", {
+        lastPlayed: null,
+      });
+    } else {
+      $("#table").bootstrapTable("filterBy", true);
+    }
+  });
+  fetch("pages/json?idForm=backup",  )
+    .then(  (response) =>response.json()
+     ).then(i=>$("#backupStatus").html("<p>"+i.backup+"</p>"));
+    
+
+})
+//////////////////////////
+
+$("#filterWatched").click(() => {
+  if ($("#filterWatched")[0].checked) {
+    $("#table").bootstrapTable("filterBy", {
+      lastPlayed: null,
+    });
+  } else {
+    $("#table").bootstrapTable("filterBy", true);
+  }
+});
+
+</script>
